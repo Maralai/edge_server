@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  watchtower:
+    container_name: watchtower
+    restart: always
+    image: containrrr/watchtower:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --schedule "0 0 0 * * *"
+
+  grafana:
+    container_name: grafana 
+    restart: always
+    image: grafana/grafana:latest
+    user: "472:0"
+    env_file: .env
+    volumes:
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources:z
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards:z
+      - ./grafana/notifiers:/etc/grafana/provisioning/notifiers:z
+      - grafana_data:/var/lib/grafana
+      - grafana_logs:/var/log/grafana
+    ports:
+      - "3000:3000"  # Expose Grafana on port 3000
+
+volumes:
+  grafana_data:
+  grafana_logs:
