@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Project specific
+/grafana/data/
+/grafana/log/
+
 # C extensions
 *.so
 
