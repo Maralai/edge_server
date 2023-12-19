@@ -1,0 +1,11 @@
+# This is an example override file for the Grafana service.
+version: '3.8'
+services:
+  grafana:
+    extends:
+      file: ./edge_server/docker-compose.yaml
+      service: grafana
+
+volumes:
+  grafana_data:
+  grafana_logs:
